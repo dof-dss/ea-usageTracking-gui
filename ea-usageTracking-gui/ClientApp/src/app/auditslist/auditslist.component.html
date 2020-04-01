@@ -1,0 +1,74 @@
+<div class="spinner-container" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+</div>
+<div>
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="govuk-table filter-table mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Audit Id </th>
+            <td mat-cell *matCellDef="let audit"> {{audit.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dateCreated">
+            <th mat-header-cell *matHeaderCellDef> Created Date </th>
+            <td mat-cell *matCellDef="let audit"> {{audit.dateCreated | date:'dd/MM/yyyy'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="application">
+            <th mat-header-cell *matHeaderCellDef> Application </th>
+            <td mat-cell *matCellDef="let audit"> {{audit.auditApplication.name}} </td>
+        </ng-container> 
+
+        <ng-container matColumnDef="subjectId">
+            <th mat-header-cell *matHeaderCellDef> Subject Id </th>
+            <td mat-cell *matCellDef="let audit"> {{audit.subjectId}} </td>
+        </ng-container> 
+
+        <ng-container matColumnDef="subject">
+            <th mat-header-cell *matHeaderCellDef> Subject </th>
+            <td mat-cell *matCellDef="let audit"> {{audit.subject}} </td>
+        </ng-container> 
+
+        <ng-container matColumnDef="actorId">
+            <th mat-header-cell *matHeaderCellDef> Actor Id </th>
+            <td mat-cell *matCellDef="let audit"> {{audit.actorId}} </td>
+        </ng-container> 
+
+        <ng-container matColumnDef="actor">
+            <th mat-header-cell *matHeaderCellDef> Actor </th>
+            <td mat-cell *matCellDef="let audit"> {{audit.actor}} </td>
+        </ng-container> 
+
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let audit"> {{audit.description}} </td>
+        </ng-container> 
+
+        <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let audit" [attr.colspan]="displayedColumns.length">
+              <div class="audit-detail"
+                   [@detailExpand]="audit == expandedAudit ? 'expanded' : 'collapsed'">
+                  <div><b>Properties</b><br/><br/>
+                    {{audit.properties}}
+                    </div>
+              </div>
+            </td>
+          </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let audit; columns: displayedColumns;"
+            class="audit-row"
+            [class.example-expanded-row]="expandedAudit === audit"
+            (click)="expandedAudit = expandedAudit === audit ? null : audit">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+    </table>
+
+    <mat-paginator [length]="10" [pageSize]="5"
+                    [pageSizeOptions]="[3, 5, 10, 100]" [showFirstLastButtons]="true"></mat-paginator>
+    
+</div>

@@ -1,0 +1,74 @@
+<div class="spinner-container" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+</div>
+<div>
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="govuk-table filter-table mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are  as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> usage Id </th>
+            <td mat-cell *matCellDef="let usage"> {{usage.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dateCreated">
+            <th mat-header-cell *matHeaderCellDef> Created Date </th>
+            <td mat-cell *matCellDef="let usage"> {{usage.dateCreated | date:'dd/MM/yyyy'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="applicationName">
+            <th mat-header-cell *matHeaderCellDef> Application </th>
+            <td mat-cell *matCellDef="let usage"> {{usage.applicationName}} </td>
+        </ng-container> 
+
+        <ng-container matColumnDef="eventId">
+            <th mat-header-cell *matHeaderCellDef> Event Id </th>
+            <td mat-cell *matCellDef="let usage"> {{usage.applicationEventId}} </td>
+        </ng-container> 
+
+        <ng-container matColumnDef="event">
+            <th mat-header-cell *matHeaderCellDef> Event </th>
+            <td mat-cell *matCellDef="let usage"> {{usage.applicationEventName}} </td>
+        </ng-container> 
+
+        <ng-container matColumnDef="userId">
+            <th mat-header-cell *matHeaderCellDef> User Id </th>
+            <td mat-cell *matCellDef="let usage"> {{usage.actorId}} </td>
+        </ng-container> 
+
+        <ng-container matColumnDef="user">
+            <th mat-header-cell *matHeaderCellDef> User </th>
+            <td mat-cell *matCellDef="let usage"> {{usage.actor}} </td>
+        </ng-container> 
+
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let usage"> {{usage.description}} </td>
+        </ng-container> 
+
+        <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let usage" [attr.colspan]="displayedColumns.length">
+              <div class="usage-detail"
+                   [@detailExpand]="usage == expandedusage ? 'expanded' : 'collapsed'">
+                  <div><b>Properties</b><br/><br/>
+                    {{usage.properties}}
+                    </div>
+              </div>
+            </td>
+          </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let usage; columns: displayedColumns;"
+            class="usage-row"
+            [class.example-expanded-row]="expandedusage === usage"
+            (click)="expandedusage = expandedusage === usage ? null : usage">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+    </table>
+
+    <mat-paginator [length]="10" [pageSize]="5"
+                    [pageSizeOptions]="[3, 5, 10, 100]" [showFirstLastButtons]="true"></mat-paginator>
+    
+</div>

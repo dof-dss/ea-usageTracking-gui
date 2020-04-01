@@ -1,0 +1,17 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-three-quarters">
+    <h2 class="govuk-heading-l">Use Single Sign-on</h2>
+    <h3 class="govuk-heading-m">AWS Congito</h3>
+    <p class="govuk-body">
+      This option is open to anyone who has a AWS Cognito account.
+    </p>
+
+    <div>
+      <button class="govuk-button" data-module="govuk-button" type="submit" *ngIf="!isLoggedIn" (click)="login()">Login as user</button>
+      <button class="govuk-button" data-module="govuk-button" type="submit" *ngIf="isLoggedIn" (click)="logout()">Sign Out</button>
+    </div>
+
+    <div><button class="govuk-button" data-module="govuk-button" type="submit" *ngIf="!isLoggedIn" (click)="appLogin()">Login as app</button></div>
+
+  </div>
+</div>

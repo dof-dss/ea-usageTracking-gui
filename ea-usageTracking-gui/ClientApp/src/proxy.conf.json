@@ -1,0 +1,7 @@
+{
+    "/api/*": {
+        "target": "https://ea-audit-auditservice.london.cloudapps.digital/",
+        "secure": true,
+        "logLevel": "debug"
+    }
+}

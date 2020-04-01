@@ -1,0 +1,40 @@
+<div class="govuk-form-group">
+    <form class="application-form" [formGroup]="applicationForm" (ngSubmit)="submit()">
+        <mat-form-field class="application-full-width">
+          <mat-label>Application Name</mat-label>
+          <input name="name" matInput formControlName="name" [errorStateMatcher]="matcher" placeholder="Ex. NICSArchitecturePortal" value="">
+          <mat-error *ngIf="applicationForm.controls.name?.hasError('length') && !applicationForm.controls.name?.hasError('required')">
+            Application Name is too long
+          </mat-error>
+          <mat-error *ngIf="applicationForm.controls.name?.hasError('required')">
+            Name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      
+        <mat-form-field class="application-full-width">
+          <mat-label>Application Description</mat-label>
+          <input name="description" matInput formControlName="description" [errorStateMatcher]="matcher" placeholder="Ex. NICS Architecture Portal which...">
+          <mat-error *ngIf="applicationForm.controls.description?.hasError('length') && !applicationForm.controls.description?.hasError('required')">
+            Application Name is too long
+          </mat-error>
+          <mat-error *ngIf="applicationForm.controls.description?.hasError('required')">
+            Name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="application-full-width">
+            <mat-label>Client Id</mat-label>
+            <input name="clientId" matInput formControlName="clientId" [errorStateMatcher]="matcher" placeholder="Ex. 343ghghg2266&*dfsdf45">
+            <mat-error *ngIf="applicationForm.controls.clientId?.hasError('length') && !applicationForm.controls.clientId?.hasError('required')">
+                Client Id is too long
+              </mat-error>
+              <mat-error *ngIf="applicationForm.controls.clientId?.hasError('required')">
+                Client Id is <strong>required</strong>
+              </mat-error>
+          </mat-form-field>
+
+          
+        <button class="govuk-button" type="submit">Continue</button>
+      </form>
+
+  </div>

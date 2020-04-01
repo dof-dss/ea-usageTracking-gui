@@ -1,0 +1,24 @@
+<fieldset class="govuk-fieldset">
+  <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+    <h1 class="govuk-fieldset__heading">
+      Please enter your application details.
+    </h1>
+  </legend>
+
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="client-id">
+      Client Id
+    </label>
+    <input class="govuk-input govuk-!-width-two-thirds" id="client-id" name="client-id" type="text">
+  </div>
+
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="secret">
+      Secret
+    </label>
+    <input class="govuk-input govuk-!-width-two-thirds" id="secret" name="secret" type="text">
+  </div>
+
+  <button class="govuk-button" data-module="govuk-button" (click)="login()">Login</button>
+
+</fieldset>
