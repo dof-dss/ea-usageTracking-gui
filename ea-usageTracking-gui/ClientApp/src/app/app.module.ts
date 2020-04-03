@@ -31,6 +31,10 @@ import { LoginComponent } from './login/login.component';
 import { AddApplicationComponent } from './add-application/add-application.component';
 import { AppLoginComponent } from './app-login/app-login.component';
 import { UsagesComponent } from './usages/usages.component';
+import { EventsComponent } from './events/events.component';
+import { ApplicationComponent } from './application/application.component';
+import { UsersComponent } from './users/users.component';
+import { EventComponent } from './event/event.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +48,11 @@ import { UsagesComponent } from './usages/usages.component';
     LoginComponent,
     AddApplicationComponent,
     AppLoginComponent,
-    UsagesComponent
+    UsagesComponent,
+    EventsComponent,
+    ApplicationComponent,
+    UsersComponent,
+    EventComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -71,9 +79,7 @@ import { UsagesComponent } from './usages/usages.component';
     MatSlideToggleModule,
     MatSelectModule,
     MatOptionModule,
-    MatProgressSpinnerModule,
-    
-    
+    MatProgressSpinnerModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
               /*{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },*/

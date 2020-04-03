@@ -3,14 +3,22 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Usage } from '../model/usage';
+import { ApplicationEvent } from '../model/applicationEvent';
 import { PaginatedReponse } from '../model/paginatedResponse';
 import { environment } from '../../environments/environment';
+import { Application } from '../model/application';
+import { User } from '../model/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsageService {
+
   private usagesUrl = environment.apiUri + 'ApplicationUsage';
+  private eventsUrl = environment.apiUri + 'ApplicationEvent';
+  private eventDetailsUrl = environment.apiUri + 'ApplicationEvent/Details';
+  private applicationUrl = environment.apiUri + 'Application';
+  private usersUrl = environment.apiUri + 'ApplicationUser';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -26,6 +34,40 @@ export class UsageService {
       }).pipe(map(res => res));
   }
 
+  getEvents(pagenumber = 1, pagesize = 3): Observable<PaginatedReponse<ApplicationEvent>> {
+      return this.http.get<PaginatedReponse<ApplicationEvent>>(this.eventsUrl, {
+                                                  params: new HttpParams()
+                                                  .set('PageNumber', pagenumber.toString())
+                                                  .set('PageSize', pagesize.toString())
+      }).pipe(map(res => res));
+  }
+
+  getEvent(id): Observable<ApplicationEvent> {
+    return this.http.get<ApplicationEvent>(this.eventDetailsUrl, {
+                                                params: new HttpParams()
+                                                .set('Id', id.toString())
+    });
+}
+
+updateEvent(applicationEvent: ApplicationEvent): Observable<ApplicationEvent> {
+  return this.http.put<ApplicationEvent>(this.eventsUrl, applicationEvent);
+}
+
+deleteEvent(applicationEvent: ApplicationEvent): Observable<ApplicationEvent> {
+  return this.http.delete<ApplicationEvent>(this.eventsUrl + '/' + applicationEvent.id);
+}
+
+  getUsers(pagenumber = 1, pagesize = 3): Observable<PaginatedReponse<User>> {
+    return this.http.get<PaginatedReponse<User>>(this.usersUrl, {
+                                                params: new HttpParams()
+                                                .set('PageNumber', pagenumber.toString())
+                                                .set('PageSize', pagesize.toString())
+    }).pipe(map(res => res));
+}
+
+  getApplication(): Observable<Application> {
+      return this.http.get<Application>(this.applicationUrl);
+  }
 
   getUsage(id: number): Observable<Usage> {
     const url = `${this.usagesUrl}/${id}`;

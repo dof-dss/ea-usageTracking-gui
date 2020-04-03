@@ -1,11 +1,9 @@
 import { Role } from "./role";
+import { Guid } from "guid-typescript";
 
 export class User {
-    id: number;
-    username: string;
-    password: string;
-    firstName: string;
-    lastName: string;
-    role: Role;
-    token?: string;
+    id: Guid;
+    name: string;
+    email: string;
+    dateCreated: string;
 }

@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 })
 export class AppLoginComponent implements OnInit {
 
-  private clientId;
-  private secret;
+  clientId;
+  secret;
 
   constructor(private authService: AuthService,  private router: Router) { }
 

@@ -24,7 +24,7 @@ export class UsagesComponent implements OnInit, AfterViewInit {
   'applicationUserId', 'applicationUserName', 'dateCreated'];
   dataSource = new MatTableDataSource<Usage>();
   isLoading = true;
-  expandedAudit: Usage | null;
+  expandedUsage: Usage | null;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild('input', {static: false}) input: ElementRef;
 

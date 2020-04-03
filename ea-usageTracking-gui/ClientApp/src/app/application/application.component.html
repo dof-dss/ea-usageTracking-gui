@@ -1,0 +1,34 @@
+<div class="spinner-container" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+</div>
+<dl class="govuk-summary-list govuk-summary-list--no-border" *ngIf="!isLoading">
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Name
+      </dt>
+      <dd class="govuk-summary-list__value">
+        {{application.name}}
+      </dd>
+      <dd class="govuk-summary-list__actions">
+        <a class="govuk-link" href="#">
+          Change<span class="govuk-visually-hidden"> name</span>
+        </a>
+      </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Date Created
+      </dt>
+      <dd class="govuk-summary-list__value">
+        {{application.dateCreated | date }}
+      </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Client Id
+      </dt>
+      <dd class="govuk-summary-list__value">
+        {{application.clientId}}
+      </dd>
+    </div>
+  </dl>

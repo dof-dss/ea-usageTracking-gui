@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Applications } from '../model/application';
 import { Application } from '../model/application';
 import { PaginatedReponse } from '../model/paginatedResponse';
 import { CreateAuditApplicationCommand } from '../model/application';
@@ -52,8 +51,8 @@ export class ApplicationService {
     return this.http.get<Application>(`${this.applicationsUrl}/?name=${term}`);
   }
 
-  insertApplication(application: CreateAuditApplicationCommand) {  
-    console.log("In insertApplication");  
+  insertApplication(application: CreateAuditApplicationCommand) {
+    console.log("In insertApplication");
 
     const headers = { 'x-requestid': Guid.create().toString() }
     this.http.post<any>(`${this.applicationsUrl}/`, application, { headers }).subscribe(data => {
@@ -80,7 +79,7 @@ export class ApplicationService {
       return of(result as T);
     };
   }
-  
+
 }
 
 

@@ -1,0 +1,65 @@
+<div class="govuk-width-container">
+    <a [routerLink]="'/events'" class="govuk-back-link">Back</a>
+
+    <main class="govuk-main-wrapper">
+
+        <h1 class="govuk-heading-xl">Event Details</h1>
+
+        <div class="spinner-container" *ngIf="isLoading">
+            <mat-spinner></mat-spinner>
+        </div>
+
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                <dl *ngIf="!isLoading" class="govuk-summary-list govuk-summary-list--no-border">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Id
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{applicationEvent.id}}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Name
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            <span *ngIf='!isEdit'>{{applicationEvent.name}}</span>
+                            <input class="govuk-input" id="eventName" [(ngModel)]="applicationEvent.name" *ngIf='isEdit'
+                                name="event-name" type="text">
+                        </dd>
+                        <dd class="govuk-summary-list__actions">
+                            <a class="govuk-link" *ngIf='!isEdit' (click)='isEdit=true;'>
+                                Change<span class="govuk-visually-hidden"> name</span>
+                            </a>
+                            <a class="govuk-link" *ngIf='isEdit' (click)='updateEvent()'>
+                                Save<span class="govuk-visually-hidden"> name</span>
+                            </a>
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Date Created
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{applicationEvent.dateCreated | date}}
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+        <button class="govuk-button govuk-button--warning" data-module="govuk-button" *ngIf='!isAboutToDelete'
+            (click)='isAboutToDelete=true'>
+            Delete Event
+        </button>
+        <button class="govuk-button govuk-button--warning govuk-!-margin-right-1" data-module="govuk-button"
+            *ngIf='isAboutToDelete' (click)='deleteEvent()'>
+            Press to Confirm
+        </button>
+        <button class="govuk-button govuk-button--secondary" data-module="govuk-button" *ngIf='isAboutToDelete'
+            (click)='isAboutToDelete=false'>
+            Cancel
+        </button>
+    </main>
+</div>
