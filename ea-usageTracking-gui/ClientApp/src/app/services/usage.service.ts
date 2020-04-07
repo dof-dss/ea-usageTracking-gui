@@ -10,10 +10,9 @@ import { Application } from '../model/application';
 import { User } from '../model/user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UsageService {
-
   private usagesUrl = environment.apiUri + 'ApplicationUsage';
   private eventsUrl = environment.apiUri + 'ApplicationEvent';
   private eventDetailsUrl = environment.apiUri + 'ApplicationEvent/Details';
@@ -21,60 +20,109 @@ export class UsageService {
   private usersUrl = environment.apiUri + 'ApplicationUser';
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
-  constructor( private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getUsages(pagenumber = 1, pagesize = 3): Observable<PaginatedReponse<Usage>> {
-      return this.http.get<PaginatedReponse<Usage>>(this.usagesUrl, {
-                                                  params: new HttpParams()
-                                                  .set('PageNumber', pagenumber.toString())
-                                                  .set('PageSize', pagesize.toString())
-      }).pipe(map(res => res));
+    return this.http
+      .get<PaginatedReponse<Usage>>(this.usagesUrl, {
+        params: new HttpParams()
+          .set('PageNumber', pagenumber.toString())
+          .set('PageSize', pagesize.toString()),
+      })
+      .pipe(map((res) => res));
   }
 
-  getEvents(pagenumber = 1, pagesize = 3): Observable<PaginatedReponse<ApplicationEvent>> {
-      return this.http.get<PaginatedReponse<ApplicationEvent>>(this.eventsUrl, {
-                                                  params: new HttpParams()
-                                                  .set('PageNumber', pagenumber.toString())
-                                                  .set('PageSize', pagesize.toString())
-      }).pipe(map(res => res));
+  getUsagesByUser(
+    id: string,
+    pagenumber = 1,
+    pagesize = 3
+  ): Observable<PaginatedReponse<Usage>> {
+    return this.http
+      .get<PaginatedReponse<Usage>>(this.usagesUrl + '/user', {
+        params: new HttpParams()
+          .set('Id', id)
+          .set('PageNumber', pagenumber.toString())
+          .set('PageSize', pagesize.toString()),
+      })
+      .pipe(map((res) => res));
+  }
+
+  getEvents(
+    pagenumber = 1,
+    pagesize = 3
+  ): Observable<PaginatedReponse<ApplicationEvent>> {
+    return this.http
+      .get<PaginatedReponse<ApplicationEvent>>(this.eventsUrl, {
+        params: new HttpParams()
+          .set('PageNumber', pagenumber.toString())
+          .set('PageSize', pagesize.toString()),
+      })
+      .pipe(map((res) => res));
   }
 
   getEvent(id): Observable<ApplicationEvent> {
     return this.http.get<ApplicationEvent>(this.eventDetailsUrl, {
-                                                params: new HttpParams()
-                                                .set('Id', id.toString())
+      params: new HttpParams().set('Id', id.toString()),
     });
-}
+  }
 
-updateEvent(applicationEvent: ApplicationEvent): Observable<ApplicationEvent> {
-  return this.http.put<ApplicationEvent>(this.eventsUrl, applicationEvent);
-}
+  updateEvent(
+    applicationEvent: ApplicationEvent
+  ): Observable<ApplicationEvent> {
+    return this.http.put<ApplicationEvent>(this.eventsUrl, applicationEvent);
+  }
 
-deleteEvent(applicationEvent: ApplicationEvent): Observable<ApplicationEvent> {
-  return this.http.delete<ApplicationEvent>(this.eventsUrl + '/' + applicationEvent.id);
-}
+  createEvent(
+    applicationEvent: ApplicationEvent
+  ): Observable<ApplicationEvent> {
+    return this.http.post<ApplicationEvent>(this.eventsUrl, applicationEvent);
+  }
+
+  deleteEvent(
+    applicationEvent: ApplicationEvent
+  ): Observable<ApplicationEvent> {
+    return this.http.delete<ApplicationEvent>(
+      this.eventsUrl + '/' + applicationEvent.id
+    );
+  }
 
   getUsers(pagenumber = 1, pagesize = 3): Observable<PaginatedReponse<User>> {
-    return this.http.get<PaginatedReponse<User>>(this.usersUrl, {
-                                                params: new HttpParams()
-                                                .set('PageNumber', pagenumber.toString())
-                                                .set('PageSize', pagesize.toString())
-    }).pipe(map(res => res));
-}
+    return this.http
+      .get<PaginatedReponse<User>>(this.usersUrl, {
+        params: new HttpParams()
+          .set('PageNumber', pagenumber.toString())
+          .set('PageSize', pagesize.toString()),
+      })
+      .pipe(map((res) => res));
+  }
+
+  getUser(id): Observable<User> {
+    return this.http.get<User>(this.usersUrl + '/Details', {
+      params: new HttpParams().set('Id', id.toString()),
+    });
+  }
 
   getApplication(): Observable<Application> {
-      return this.http.get<Application>(this.applicationUrl);
+    return this.http.get<Application>(this.applicationUrl);
+  }
+
+  createApplication(application: Application): Observable<Application> {
+    return this.http.post<Application>(
+      this.applicationUrl + '/' + application.name,
+      null
+    );
   }
 
   getUsage(id: number): Observable<Usage> {
     const url = `${this.usagesUrl}/${id}`;
     return this.http.get<Usage>(url).pipe(
-      tap(_ => { const outcome = _ ? `fetched` : `did not find`;
-        //this.log(`fetched Audit id=${id}`)
-    }),
+      tap((_) => {
+        const outcome = _ ? `fetched` : `did not find`;
+        // this.log(`fetched Audit id=${id}`)
+      }),
       catchError(this.handleError<Usage>(`getAudit id=${id}`))
     );
   }
@@ -85,14 +133,13 @@ deleteEvent(applicationEvent: ApplicationEvent): Observable<ApplicationEvent> {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 
       // TODO: better job of transforming error for user consumption
-      //this.log(`${operation} failed: ${error.message}`);
+      // this.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.
       return of(result as T);

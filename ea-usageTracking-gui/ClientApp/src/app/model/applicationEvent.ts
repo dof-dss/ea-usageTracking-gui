@@ -1,4 +1,4 @@
-export interface ApplicationEvent {
+export class ApplicationEvent {
     id: number;
     name: string;
     dateCreated: string;

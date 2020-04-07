@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UsageService } from '../services/usage.service';
 import { ApplicationEvent } from '../model/applicationEvent';
 
@@ -15,7 +15,7 @@ export class EventComponent implements OnInit {
   applicationEvent: ApplicationEvent;
   isAboutToDelete = false;
  
-  constructor(private activatedroute: ActivatedRoute, private usageService: UsageService) { }
+  constructor(private activatedroute: ActivatedRoute, private usageService: UsageService, private router: Router) { }
 
   ngOnInit() {
     this.activatedroute.paramMap.subscribe(params => {
@@ -30,6 +30,7 @@ export class EventComponent implements OnInit {
   deleteEvent() {
     this.usageService.deleteEvent(this.applicationEvent).subscribe(r => {
       this.isAboutToDelete = false;
+      this.router.navigateByUrl('/events');
     });
   }
 

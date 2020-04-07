@@ -13,6 +13,8 @@ import { EventsComponent } from './events/events.component';
 import { ApplicationComponent } from './application/application.component';
 import { UsersComponent } from './users/users.component';
 import { EventComponent } from './event/event.component';
+import { AddEventComponent } from './add-event/add-event.component';
+import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
   {
@@ -46,6 +48,12 @@ const routes: Routes = [
     data: { roles: [Role.Admin] }
   },
   {
+    path: 'user/:id',
+    component: UserComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin] }
+  },
+  {
     path: 'events',
     component: EventsComponent,
     canActivate: [AuthGuard],
@@ -54,6 +62,12 @@ const routes: Routes = [
   {
     path: 'event/:id',
     component: EventComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin] }
+  },
+  {
+    path: 'add-event',
+    component: AddEventComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.Admin] }
   },
@@ -74,7 +88,7 @@ const routes: Routes = [
     data: { roles: [Role.Admin] }
   },
   {
-    path: 'addapplication',
+    path: 'add-application',
     component: AddApplicationComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.Admin] }

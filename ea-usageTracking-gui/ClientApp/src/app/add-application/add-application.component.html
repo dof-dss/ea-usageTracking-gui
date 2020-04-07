@@ -21,18 +21,6 @@
             Name is <strong>required</strong>
           </mat-error>
         </mat-form-field>
-
-        <mat-form-field class="application-full-width">
-            <mat-label>Client Id</mat-label>
-            <input name="clientId" matInput formControlName="clientId" [errorStateMatcher]="matcher" placeholder="Ex. 343ghghg2266&*dfsdf45">
-            <mat-error *ngIf="applicationForm.controls.clientId?.hasError('length') && !applicationForm.controls.clientId?.hasError('required')">
-                Client Id is too long
-              </mat-error>
-              <mat-error *ngIf="applicationForm.controls.clientId?.hasError('required')">
-                Client Id is <strong>required</strong>
-              </mat-error>
-          </mat-form-field>
-
           
         <button class="govuk-button" type="submit">Continue</button>
       </form>

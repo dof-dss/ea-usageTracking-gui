@@ -1,4 +1,4 @@
-export interface Application {
+export class Application {
     id: number;
     dateCreated: string;
     name: string;

@@ -10,6 +10,7 @@ import { UsageService } from '../services/usage.service';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { merge } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -24,7 +25,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild('input', { static: false }) input: ElementRef;
 
-  constructor(private usageService: UsageService) {}
+  constructor(private usageService: UsageService, private route: Router) {}
 
   ngOnInit() {
     this.usageService.getUsers(1, 5).subscribe(a => {
@@ -47,5 +48,9 @@ export class UsersComponent implements OnInit, AfterViewInit {
         this.dataSource = new MatTableDataSource<User>(a.data);
         this.paginator.length = a.total;
       });
+  }
+
+  onRowClicked(applicationUser: User) {
+    this.route.navigateByUrl('/user/' + applicationUser.id);
   }
 }

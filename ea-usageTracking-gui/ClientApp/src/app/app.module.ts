@@ -35,6 +35,8 @@ import { EventsComponent } from './events/events.component';
 import { ApplicationComponent } from './application/application.component';
 import { UsersComponent } from './users/users.component';
 import { EventComponent } from './event/event.component';
+import { AddEventComponent } from './add-event/add-event.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { EventComponent } from './event/event.component';
     EventsComponent,
     ApplicationComponent,
     UsersComponent,
-    EventComponent
+    EventComponent,
+    AddEventComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

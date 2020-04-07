@@ -29,10 +29,7 @@
         </ng-container> 
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let user; columns: displayedColumns;"
-            class="user-row"
-            [class.example-expanded-row]="expandedUser === user"
-            (click)="expandeduser = expandedUser === user ? null : user">
+        <tr mat-row *matRowDef="let user; columns: displayedColumns;" class="user-row" (click)="onRowClicked(user)">
         </tr>
 
     </table>

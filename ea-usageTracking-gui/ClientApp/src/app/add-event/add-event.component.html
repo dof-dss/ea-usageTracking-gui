@@ -1,0 +1,22 @@
+<div class="govuk-width-container">
+    <a [routerLink]="'/events'" class="govuk-back-link">Back</a>
+
+    <main class="govuk-main-wrapper">
+
+        <h1 class="govuk-heading-xl">Add Event</h1>
+
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                <div class="govuk-form-group">
+                    <label class="govuk-label" for="event-name">
+                      Event name
+                    </label>
+                    <input class="govuk-input" id="event-name" name="event-name" [(ngModel)]="applicationEvent.name" type="text">
+                  </div>
+            </div>
+        </div>
+        <button class="govuk-button" data-module="govuk-button" (click)="save()">
+            Save
+        </button>
+    </main>
+</div>
