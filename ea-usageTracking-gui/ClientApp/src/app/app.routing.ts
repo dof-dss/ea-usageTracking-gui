@@ -2,13 +2,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { AuditslistComponent } from './auditslist/auditslist.component';
 import { UsagesComponent } from './usages/usages.component';
-import { ApplicationsComponent } from './applications/applications.component';
 import { AddApplicationComponent } from './add-application/add-application.component';
 import { AppLoginComponent } from './app-login/app-login.component';
 import { AuthGuard } from './infrastructure/auth.guard';
-import { Role } from './model/role';
+
 import { EventsComponent } from './events/events.component';
 import { ApplicationComponent } from './application/application.component';
 import { UsersComponent } from './users/users.component';
@@ -30,68 +28,48 @@ const routes: Routes = [
     component: AppLoginComponent
   },
   {
-    path: 'audits',
-    component: AuditslistComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] }
-  },
-  {
     path: 'usages',
     component: UsagesComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] }
+    canActivate: [AuthGuard]
   },
   {
     path: 'users',
     component: UsersComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] }
+    canActivate: [AuthGuard]
   },
   {
     path: 'user/:id',
     component: UserComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] }
+    canActivate: [AuthGuard]
   },
   {
     path: 'events',
     component: EventsComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] }
+    canActivate: [AuthGuard]
   },
   {
     path: 'event/:id',
     component: EventComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] }
+    canActivate: [AuthGuard]
   },
   {
     path: 'add-event',
     component: AddEventComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] }
+    canActivate: [AuthGuard]
   },
   {
     path: 'home',
     component: HomeComponent
   },
   {
-    path: 'applications',
-    component: ApplicationsComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] }
-  },
-  {
     path: 'application',
     component: ApplicationComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] }
+    canActivate: [AuthGuard]
   },
   {
     path: 'add-application',
     component: AddApplicationComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] }
+    canActivate: [AuthGuard]
   },
 
   // otherwise redirect to home

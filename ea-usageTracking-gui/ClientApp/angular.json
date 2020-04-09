@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "EA.Audit.AuditGui": {
+    "EA.UsageTracking.Gui": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -37,41 +37,58 @@
             "scripts": []
           },
           "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true
-            }
+          "staging": {
+            "fileReplacements": [
+              {
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.staging.ts"
+              }
+            ],
+            "optimization": true,
+            "outputHashing": "all",
+            "sourceMap": false,
+            "extractCss": true,
+            "namedChunks": false,
+            "aot": true,
+            "extractLicenses": true,
+            "vendorChunk": false,
+            "buildOptimizer": true
+          },
+          "production": {
+            "fileReplacements": [
+              {
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.prod.ts"
+              }
+            ],
+            "optimization": true,
+            "outputHashing": "all",
+            "sourceMap": false,
+            "extractCss": true,
+            "namedChunks": false,
+            "aot": true,
+            "extractLicenses": true,
+            "vendorChunk": false,
+            "buildOptimizer": true
           }
+        }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "EA.Audit.AuditGui:build",
+            "browserTarget": "EA.UsageTracking.Gui:build",
             "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "EA.Audit.AuditGui:build:production"
+              "browserTarget": "EA.UsageTracking.Gui:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "EA.Audit.AuditGui:build"
+            "browserTarget": "EA.UsageTracking.Gui:build"
           }
         },
         "test": {
@@ -121,7 +138,7 @@
         }
       }
     },
-    "EA.Audit.AuditGui-e2e": {
+    "EA.UsageTracking.Gui-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -129,7 +146,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "EA.Audit.AuditGui:serve"
+            "devServerTarget": "EA.UsageTracking.Gui:serve"
           }
         },
         "lint": {
@@ -142,5 +159,5 @@
       }
     }
   },
-  "defaultProject": "EA.Audit.AuditGui"
+  "defaultProject": "EA.UsageTracking.Gui"
 }

@@ -8,12 +8,7 @@ import {
   FormGroup
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { AuthService } from '../services/auth.service';
-import { ApplicationService } from '../services/application.service';
-import {
-  CreateAuditApplicationCommand,
-  Application
-} from '../model/application';
+import { Application } from '../model/application';
 import { Router } from '@angular/router';
 import { UsageService } from '../services/usage.service';
 
@@ -64,7 +59,7 @@ export class AddApplicationComponent implements OnInit {
       this.application = new Application();
       this.application.name = this.applicationForm.controls['name'].value;
       this.usageService
-        .createApplication(this.application)
+        .saveApplication(this.application)
         .subscribe(result => {
           this.router.navigate(['/application']);
         });

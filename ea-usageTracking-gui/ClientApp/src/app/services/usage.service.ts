@@ -109,7 +109,7 @@ export class UsageService {
     return this.http.get<Application>(this.applicationUrl);
   }
 
-  createApplication(application: Application): Observable<Application> {
+  saveApplication(application: Application): Observable<Application> {
     return this.http.post<Application>(
       this.applicationUrl + '/' + application.name,
       null

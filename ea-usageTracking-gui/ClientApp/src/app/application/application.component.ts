@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class ApplicationComponent implements OnInit {
   application: Application;
   isLoading = true;
+  isEdit = false;
   noApplication = false;
 
   constructor(private usageService: UsageService, private route: Router) {}
@@ -31,5 +32,11 @@ export class ApplicationComponent implements OnInit {
 
   create() {
     this.route.navigateByUrl('/add-application');
+  }
+
+  updateApplication() {
+    this.usageService.saveApplication(this.application).subscribe(r => {
+      this.isEdit = false;
+    });
   }
 }

@@ -22,8 +22,6 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AuditslistComponent } from './auditslist/auditslist.component';
-import { ApplicationsComponent } from './applications/applications.component';
 import { appRoutingModule } from './app.routing';
 import { JwtInterceptor } from './infrastructure/jwt.interceptor';
 import { HeaderComponent } from './header/header.component';
@@ -44,8 +42,6 @@ import { UserComponent } from './user/user.component';
     NavMenuComponent,
     HomeComponent,
     FooterComponent,
-    AuditslistComponent,
-    ApplicationsComponent,
     HeaderComponent,
     LoginComponent,
     AddApplicationComponent,
