@@ -13,6 +13,9 @@ import { UsersComponent } from './users/users.component';
 import { EventComponent } from './event/event.component';
 import { AddEventComponent } from './add-event/add-event.component';
 import { UserComponent } from './user/user.component';
+import { UserUsageComponent } from './user-usage/user-usage.component';
+import { UserAppsComponent } from './user-apps/user-apps.component';
+import { UserAppComponent } from './user-app/user-app.component';
 
 const routes: Routes = [
   {
@@ -33,6 +36,16 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'user-usages',
+    component: UserUsageComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'user-apps',
+    component: UserAppsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'users',
     component: UsersComponent,
     canActivate: [AuthGuard]
@@ -50,6 +63,11 @@ const routes: Routes = [
   {
     path: 'event/:id',
     component: EventComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'user-app/:id',
+    component: UserAppComponent,
     canActivate: [AuthGuard]
   },
   {

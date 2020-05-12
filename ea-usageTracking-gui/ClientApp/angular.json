@@ -37,6 +37,23 @@
             "scripts": []
           },
           "configurations": {
+            "sandbox": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sandbox.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
           "staging": {
             "fileReplacements": [
               {
@@ -77,7 +94,9 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "EA.UsageTracking.Gui:build",
-            "proxyConfig": "src/proxy.conf.json"
+            "proxyConfig": "src/proxy.conf.json",
+            "sslKey": "./localhost_certificates/localhost.key",
+            "sslCert": "./localhost_certificates/localhost.crt"
           },
           "configurations": {
             "production": {

@@ -33,7 +33,7 @@
       <button type="button" class="govuk-header__menu-button govuk-js-header-toggle" aria-controls="navigation"
         aria-label="Show or hide Top Level Navigation">Menu</button>
       <nav>
-        <ul id="navigation" class="govuk-header__navigation " aria-label="Top Level Navigation">
+        <ul id="navigation" class="govuk-header__navigation " aria-label="Top Level Navigation" *ngIf='isLoggedIn && isApp'>
           <li class="govuk-header__navigation-item">
             <a class="govuk-header__link" [routerLink]="'/application'">
               Application
@@ -74,6 +74,26 @@
                   or with swipe gestures.</span>
               </div>
             </div>
+          </li>
+          <li class="govuk-header__navigation-item">
+            <form method="POST" id="logout" action="">
+              <a class="govuk-header__link" href="javascript:{}" *ngIf="isLoggedIn"
+                (click)="logout()">{{ isLoggedIn ? "Logout" : "Login" }}</a>
+            </form>
+          </li>
+        
+        
+        </ul>
+        <ul id="navigation" class="govuk-header__navigation " aria-label="Top Level Navigation" *ngIf='isLoggedIn && !isApp'>
+          <li class="govuk-header__navigation-item">
+            <a class="govuk-header__link" [routerLink]="'/user-apps'">
+              Applications
+            </a>
+          </li>
+          <li class="govuk-header__navigation-item">
+            <a class="govuk-header__link" [routerLink]="'/user-usages'">
+              Usage Items
+            </a>
           </li>
           <li class="govuk-header__navigation-item">
             <form method="POST" id="logout" action="">

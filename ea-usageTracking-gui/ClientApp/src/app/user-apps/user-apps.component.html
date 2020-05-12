@@ -1,0 +1,50 @@
+<div class="spinner-container" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+</div>
+<div>
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="govuk-table filter-table mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are  as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="applicationId">
+            <th mat-header-cell *matHeaderCellDef> App Id </th>
+            <td mat-cell *matCellDef="let app"> {{app.applicationId}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dateCreated">
+            <th mat-header-cell *matHeaderCellDef> Created Date </th>
+            <td mat-cell *matCellDef="let app"> {{app.dateCreated | date:'dd/MM/yyyy'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Application </th>
+            <td mat-cell *matCellDef="let app"> {{app.name}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="isRegistered">
+            <th mat-header-cell *matHeaderCellDef> Registered? </th>
+            <td mat-cell *matCellDef="let app">
+                <div class="govuk-!-padding-top-2">
+                    <button class="govuk-button" data-module="govuk-button" *ngIf="!app.isRegistered">
+                        Register
+                    </button>
+                    <button class="govuk-button govuk-button--secondary" data-module="govuk-button" 
+                    (click)="goToDetails(app)" *ngIf="app.isRegistered">
+                        Details
+                    </button>
+                </div>
+            </td>
+        </ng-container> 
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let app; columns: displayedColumns;" class="app-row">
+        </tr>
+
+    </table>
+
+    <mat-paginator [length]="10" [pageSize]="5"
+                    [pageSizeOptions]="[3, 5, 10, 100]" [showFirstLastButtons]="true"></mat-paginator>
+    
+</div>

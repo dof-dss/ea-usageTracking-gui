@@ -6,11 +6,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { tap } from 'rxjs/operators';
 import { merge } from 'rxjs';
 import { MatTableDataSource } from '@angular/material';
+import { UsagePerUserService } from '../services/usage-per-user.service';
 
 @Component({
-  selector: 'app-usages',
-  templateUrl: './usages.component.html',
-  styleUrls: ['./usages.component.scss'],
+  selector: 'app-user-usage',
+  templateUrl: './user-usage.component.html',
+  styleUrls: ['./user-usage.component.scss'],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({height: '0px', minHeight: '0', display: 'none'})),
@@ -19,16 +20,15 @@ import { MatTableDataSource } from '@angular/material';
     ]),
   ]
 })
-export class UsagesComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['id', 'applicationName', 'applicationEventId', 'applicationEventName',
-  'applicationUserId', 'applicationUserEmail', 'dateCreated'];
+export class UserUsageComponent implements OnInit, AfterViewInit {
+  displayedColumns: string[] = ['applicationName', 'applicationEventName', 'dateCreated'];
   dataSource = new MatTableDataSource<Usage>();
   isLoading = true;
   expandedUsage: Usage | null;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild('input', {static: false}) input: ElementRef;
 
-  constructor(private usageService: UsageService) { }
+  constructor(private usageService: UsagePerUserService) { }
 
   ngOnInit() {
     this.usageService.getUsages(1, 5).subscribe(a => {

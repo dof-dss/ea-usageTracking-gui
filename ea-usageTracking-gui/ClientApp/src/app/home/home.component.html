@@ -12,6 +12,17 @@
                 <li>Use this GUI to track usage events and users.</li>
             </u>
         </p>
+        <div>
+            <button class="govuk-button" data-module="govuk-button" type="submit" *ngIf="!isLoggedIn" (click)="login()">Login as user</button>     
+          </div>
+      
+          <div>
+            <button class="govuk-button" data-module="govuk-button" type="submit" *ngIf="!isLoggedIn" (click)="appLogin()">Login as app</button>
+          </div>
+      
+          <div> 
+            <button class="govuk-button" data-module="govuk-button" type="submit" *ngIf="isLoggedIn" (click)="logout()">Sign Out</button>
+          </div>
     </div>
 </div>
 

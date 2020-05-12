@@ -6,11 +6,14 @@ import { MatPaginator } from '@angular/material/paginator';
 import { tap } from 'rxjs/operators';
 import { merge } from 'rxjs';
 import { MatTableDataSource } from '@angular/material';
+import { UsagePerUserService } from '../services/usage-per-user.service';
+import { Application } from '../model/application';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-usages',
-  templateUrl: './usages.component.html',
-  styleUrls: ['./usages.component.scss'],
+  selector: 'app-user-apps',
+  templateUrl: './user-apps.component.html',
+  styleUrls: ['./user-apps.component.scss'],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({height: '0px', minHeight: '0', display: 'none'})),
@@ -19,21 +22,20 @@ import { MatTableDataSource } from '@angular/material';
     ]),
   ]
 })
-export class UsagesComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['id', 'applicationName', 'applicationEventId', 'applicationEventName',
-  'applicationUserId', 'applicationUserEmail', 'dateCreated'];
-  dataSource = new MatTableDataSource<Usage>();
+export class UserAppsComponent implements OnInit, AfterViewInit {
+  displayedColumns: string[] = ['applicationId', 'name', 'dateCreated', 'isRegistered'];
+  dataSource = new MatTableDataSource<Application>();
   isLoading = true;
   expandedUsage: Usage | null;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild('input', {static: false}) input: ElementRef;
 
-  constructor(private usageService: UsageService) { }
+  constructor(private usageService: UsagePerUserService, private route: Router) { }
 
   ngOnInit() {
-    this.usageService.getUsages(1, 5).subscribe(a => {
+    this.usageService.getAllApps(1, 5).subscribe(a => {
       this.isLoading = false;
-      this.dataSource = new MatTableDataSource<Usage>(a.data);
+      this.dataSource = new MatTableDataSource<Application>(a.data);
       this.paginator.length = a.total;
     });
   }
@@ -41,16 +43,20 @@ export class UsagesComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     merge(this.paginator.page)
     .pipe(
-        tap(() => this.loadUsagesPage())
+        tap(() => this.loadAppsPage())
     )
     .subscribe();
 }
 
-loadUsagesPage() {
-  this.usageService.getUsages(this.paginator.pageIndex + 1,
+loadAppsPage() {
+  this.usageService.getAllApps(this.paginator.pageIndex + 1,
     this.paginator.pageSize).subscribe(a => {
-    this.dataSource = new MatTableDataSource<Usage>(a.data);
+    this.dataSource = new MatTableDataSource<Application>(a.data);
     this.paginator.length = a.total;
   });
+}
+
+goToDetails(application: Application) {
+  this.route.navigateByUrl('/user-app/' + application.applicationId);
 }
 }

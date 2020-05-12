@@ -6,6 +6,7 @@ export interface Usage {
     applicationEventId: number;
     applicationUserId: Guid;
     applicationUserName: string;
+    applicationUserEmail: string;
     applicationEventName: string;
     applicationName: string;
     dateCreated: string;

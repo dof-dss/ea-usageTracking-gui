@@ -1,8 +1,9 @@
 export class Application {
-    id: number;
+    applicationId: number;
     dateCreated: string;
     name: string;
     clientId: string;
+    isRegistered: boolean;
 }
 
 export interface CreateAuditApplicationCommand {

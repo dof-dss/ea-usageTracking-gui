@@ -41,7 +41,7 @@ export class UsageService {
     pagesize = 3
   ): Observable<PaginatedReponse<Usage>> {
     return this.http
-      .get<PaginatedReponse<Usage>>(this.usagesUrl + '/user', {
+      .get<PaginatedReponse<Usage>>(this.usagesUrl + '/User', {
         params: new HttpParams()
           .set('Id', id)
           .set('PageNumber', pagenumber.toString())
