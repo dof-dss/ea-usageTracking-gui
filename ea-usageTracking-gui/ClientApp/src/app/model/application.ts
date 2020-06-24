@@ -6,9 +6,8 @@ export class Application {
     isRegistered: boolean;
 }
 
-export interface CreateAuditApplicationCommand {
-  name: string;
-  description: string;
-  clientId: string;
+export class RegisterCommand {
+  applicationId: number;
+  identityToken: string;
 }
 

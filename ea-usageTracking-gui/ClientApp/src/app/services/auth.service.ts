@@ -36,6 +36,10 @@ export class AuthService {
     return localStorage.getItem('access_token');
   }
 
+  public get currentIdToken() {
+    return localStorage.getItem('id_token');
+  }
+
   getClientCredentials(clientId: string, secret: string): Observable<boolean> {
     const encodedDetails = 'Basic ' + window.btoa(clientId + ':' + secret);
     const headers = new HttpHeaders({

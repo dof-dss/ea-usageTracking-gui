@@ -44,6 +44,12 @@
                   "with": "src/environments/environment.sandbox.ts"
                 }
               ],
+              "assets": [
+                {
+                  "glob": "manifest.yml",
+                  "input": "src/manifests/sandbox/",
+                  "output": "./"
+                }],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -61,6 +67,12 @@
                 "with": "src/environments/environment.staging.ts"
               }
             ],
+            "assets": [
+              {
+                "glob": "manifest.yml",
+                "input": "src/manifests/staging/",
+                "output": "./"
+              }],
             "optimization": true,
             "outputHashing": "all",
             "sourceMap": false,
@@ -78,6 +90,12 @@
                 "with": "src/environments/environment.prod.ts"
               }
             ],
+            "assets": [
+              {
+                "glob": "manifest.yml",
+                "input": "src/manifests/prod/",
+                "output": "./"
+              }],
             "optimization": true,
             "outputHashing": "all",
             "sourceMap": false,

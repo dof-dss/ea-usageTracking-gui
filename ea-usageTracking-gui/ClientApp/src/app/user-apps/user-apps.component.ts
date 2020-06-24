@@ -7,8 +7,9 @@ import { tap } from 'rxjs/operators';
 import { merge } from 'rxjs';
 import { MatTableDataSource } from '@angular/material';
 import { UsagePerUserService } from '../services/usage-per-user.service';
-import { Application } from '../model/application';
+import { Application, RegisterCommand } from '../model/application';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-user-apps',
@@ -30,7 +31,7 @@ export class UserAppsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild('input', {static: false}) input: ElementRef;
 
-  constructor(private usageService: UsagePerUserService, private route: Router) { }
+  constructor(private usageService: UsagePerUserService, private route: Router, private authService: AuthService) { }
 
   ngOnInit() {
     this.usageService.getAllApps(1, 5).subscribe(a => {
@@ -58,5 +59,14 @@ loadAppsPage() {
 
 goToDetails(application: Application) {
   this.route.navigateByUrl('/user-app/' + application.applicationId);
+}
+
+register(application: Application) {
+  const registerCommand = new RegisterCommand();
+  registerCommand.applicationId = application.applicationId;
+  registerCommand.identityToken = this.authService.currentIdToken;
+  this.usageService.registerApp(registerCommand).subscribe(result => {
+    this.loadAppsPage();
+  });
 }
 }

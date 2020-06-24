@@ -1,0 +1,6 @@
+---
+applications:
+- name: ea-usagetracking-gui-sandbox
+  memory: 64M
+  buildpacks:
+  - staticfile_buildpack
