@@ -10,7 +10,11 @@ jobs:
       - node/with-cache:
           steps:
             - run: npm install
-            - run: npm run build-production
+            - run: 
+              name: "Build Production"
+              command: |
+                cd ea-usageTracking-gui/ClientApp
+                npm run build-production
 workflows:
     build-and-test:
       jobs:
