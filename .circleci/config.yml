@@ -1,6 +1,9 @@
 version: 2.1
 jobs:
-  build:
+  build-and-deploy:
+    parameters:
+      stage:
+        type: string
     working_directory: ~/usage
     docker:
       - image: circleci/node:10.16.3
@@ -16,7 +19,7 @@ jobs:
             ls
             cd ./ea-usageTracking-gui/ClientApp
             npm install @angular/cli          
-            npm run build-production
+            npm run build-<< parameters.stage >>
       - run:
           name: Deploy
           command: |
@@ -24,3 +27,15 @@ jobs:
             curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
             sudo dpkg -i cf-cli_amd64.deb
             cf -v
+            cf api https://api.london.cloud.service.gov.uk
+            cf auth "$CF_USERNAME" "$CF_PASSWORD"
+            cf target
+            echo "$CF_SPACE" 
+            cf target -o DOF-DSS  -s << parameters.space >> 
+            cf push
+workflows:
+  build-deploy-sandbox:
+    jobs:
+      - build-and-deploy:
+          space: "sandbox"
+          context: govuk-paas-sandbox
