@@ -22,4 +22,5 @@ jobs:
           command: |
             ls
             cd ./ea-usageTracking-gui/ClientApp
+            npm install -g @angular/cli
             npm run build-production
