@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build-and-deploy:
     parameters:
-      stage:
+      space:
         type: string
     working_directory: ~/usage
     docker:
@@ -19,7 +19,7 @@ jobs:
             ls
             cd ./ea-usageTracking-gui/ClientApp
             npm install @angular/cli          
-            npm run build-<< parameters.stage >>
+            npm run build-<< parameters.space >>
       - run:
           name: Deploy
           command: |
