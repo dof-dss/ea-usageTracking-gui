@@ -47,7 +47,7 @@
               "assets": [
                 {
                   "glob": "manifest.yml",
-                  "input": "src/manifests/sandbox/",
+                  "input": "src/assets/manifests/sandbox/",
                   "output": "./"
                 }],
               "optimization": true,
@@ -70,7 +70,7 @@
             "assets": [
               {
                 "glob": "manifest.yml",
-                "input": "src/manifests/staging/",
+                "input": "src/assets/manifests/staging/",
                 "output": "./"
               }],
             "optimization": true,
@@ -93,7 +93,7 @@
             "assets": [
               {
                 "glob": "manifest.yml",
-                "input": "src/manifests/prod/",
+                "input": "src/assets/manifests/prod/",
                 "output": "./"
               }],
             "optimization": true,

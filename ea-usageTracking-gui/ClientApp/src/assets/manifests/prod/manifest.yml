@@ -1,6 +1,6 @@
 ---
 applications:
-- name: ea-usagetracking-gui-staging
+- name: ea-usagetracking-gui
   memory: 64M
   buildpacks:
   - staticfile_buildpack
