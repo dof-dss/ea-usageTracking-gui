@@ -21,5 +21,6 @@ jobs:
           name: Deploy
           command: |
             cd ./ea-usageTracking-gui/ClientApp/dist
-            npm i cloudfoundry-cli
-            cf push
+            curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
+            sudo dpkg -i cf-cli_amd64.deb
+            cf -v
