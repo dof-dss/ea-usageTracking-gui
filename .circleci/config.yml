@@ -10,16 +10,16 @@ jobs:
           name: Install Dependencies
           command: |
             npm install
-            npm install @angular/cli
-            npm i cloudfoundry-cli
       - run:
           name: Build
           command: |
             ls
             cd ./ea-usageTracking-gui/ClientApp
+            npm install @angular/cli          
             npm run build-production
       - run:
           name: Deploy
           command: |
             cd ./ea-usageTracking-gui/ClientApp/dist
+            npm i cloudfoundry-cli
             cf push
