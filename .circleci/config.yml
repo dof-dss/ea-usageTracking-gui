@@ -1,27 +1,25 @@
 version: 2.1
 jobs:
   build:
-    working_directory: ~/ea-usageTracking-gui/ClientApp
+    working_directory: ~/usage
     docker:
       - image: circleci/node:10.16.3
     steps:
       - checkout
       - run:
-          name: Update NPM
-          command: "sudo npm install -g npm@5"
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
-      - run:
           name: Install Dependencies
-          command: npm install
-      - save_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
-          paths:
-            - ./node_modules
+          command: |
+            npm install
+            npm install @angular/cli
+            npm i cloudfoundry-cli
       - run:
           name: Build
           command: |
             ls
             cd ./ea-usageTracking-gui/ClientApp
-            npm install @angular/cli
             npm run build-production
+      - run:
+          name: Deploy
+          command: |
+            cd ./ea-usageTracking-gui/ClientApp/dist
+            cf push
