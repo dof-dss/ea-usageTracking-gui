@@ -1,7 +1,6 @@
 version: 2.1
 jobs:
   build:
-    working_directory: ~/ea-usageTracking-gui/ClientApp
     docker:
       - image: circleci/node:10.16.3
     steps:
@@ -20,4 +19,6 @@ jobs:
             - ./node_modules
       - run:
           name: Build
-          command: ls
+          command: |
+            cd ./ea-usageTracking-gui/ClientApp
+            npm run build-production
