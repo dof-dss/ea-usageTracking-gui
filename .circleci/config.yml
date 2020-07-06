@@ -71,6 +71,8 @@ workflows:
               ignore: /.*/
       - build-and-deploy:
           space: "production"
+          requires:
+            - hold
           context: govuk-paas-production
           filters:    # selected tags and no branches
             tags:
