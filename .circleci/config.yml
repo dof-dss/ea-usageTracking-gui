@@ -1,5 +1,12 @@
 version: 2.1
 jobs:
+  hold:
+    docker:
+      - image: circleci/node:10.16.3
+    steps:
+      - run:
+          name: "Wait for approval"
+          command: echo Wait
   build-and-deploy:
     parameters:
       space:
@@ -38,4 +45,35 @@ workflows:
     jobs:
       - build-and-deploy:
           space: "sandbox"
+          filters:
+            branches:
+              only:
+                - master          
           context: govuk-paas-sandbox
+  build-deploy-staging:
+    jobs:
+      - build-and-deploy:
+          space: "staging"
+          context: govuk-paas-staging
+          filters:    # selected tags and no branches
+            tags:
+              only: /^v(0|[0-9]\d*)\.(0|[0-9]\d*)\.(0|[0-9]\d*)(?:-(alpha|beta))?$/
+            branches:
+              ignore: /.*/
+  build-deploy-prod:
+    jobs:
+      - hold:
+          type: approval 
+          filters:    # selected tags and no branches
+            tags:
+              only: /^v(0|[0-9]\d*)\.(0|[0-9]\d*)\.(0|[0-9]\d*)(?:-(alpha|beta))?$/
+            branches:
+              ignore: /.*/
+      - build-and-deploy:
+          space: "production"
+          context: govuk-paas-production
+          filters:    # selected tags and no branches
+            tags:
+              only: /^v(0|[0-9]\d*)\.(0|[0-9]\d*)\.(0|[0-9]\d*)(?:-(alpha|beta))?$/
+            branches:
+              ignore: /.*/
