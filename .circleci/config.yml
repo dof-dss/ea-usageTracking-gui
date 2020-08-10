@@ -29,7 +29,6 @@ jobs:
             ls
             cd ./ea-usageTracking-gui/ClientApp
             echo $env_<< parameters.env >>
-            echo $env_<< parameters.env >> > ./src/environments/environment.<< parameters.env >>.ts
             cat ./src/environments/environment.<< parameters.env >>.ts
             cat ./src/environments/environment.ts
             ls -l ./src/environments
