@@ -28,7 +28,7 @@ jobs:
           command: |
             ls
             cd ./ea-usageTracking-gui/ClientApp
-            echo $en_<< parameters.env >>
+            echo $env_<< parameters.env >>
             echo $env_<< parameters.env >> > ./src/environments/environment.<< parameters.env >>.ts
             npm install @angular/cli          
             npm run build-<< parameters.space >>
