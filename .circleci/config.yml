@@ -1,4 +1,5 @@
 version: 2.1
+
 jobs:
   hold:
     docker:
@@ -25,6 +26,7 @@ jobs:
           command: |
             ls
             cd ./ea-usageTracking-gui/ClientApp
+            echo $ENV_PROD
             npm install @angular/cli          
             npm run build-<< parameters.space >>
       - run:
