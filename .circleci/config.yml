@@ -63,7 +63,7 @@ workflows:
     jobs:
       - build-and-deploy:
           space: "staging"
-          env: "sandbox"
+          env: "staging"
           context: govuk-paas-staging
           filters:    # selected tags and no branches
             tags:
